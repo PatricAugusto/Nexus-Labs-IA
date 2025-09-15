@@ -1,9 +1,6 @@
-// src/components/ServicesSection/ServicesSection.js
-
 import styled from 'styled-components';
 import { FaCode, FaShoppingCart, FaRocket } from 'react-icons/fa';
 
-// Dados de exemplo para os serviços
 const servicesData = [
   {
     title: 'Sistemas de Gestão Personalizados',
@@ -22,7 +19,6 @@ const servicesData = [
   },
 ];
 
-// Contêiner principal da seção
 const ServicesContainer = styled.section.attrs({ id: 'services' })`
   display: flex;
   flex-direction: column;
@@ -46,7 +42,6 @@ const ServicesSubtitle = styled.p`
   color: #bbb;
 `;
 
-// Grade para os cards
 const ServicesGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -54,13 +49,11 @@ const ServicesGrid = styled.div`
   width: 100%;
   max-width: 1200px;
   
-  // Adicionando Media Query para telas menores
   @media screen and (max-width: 768px) {
     gap: 20px;
   }
 `;
 
-// Card com o estilo Glassmorphism
 const ServiceCard = styled.div`
   padding: 40px;
   border-radius: 15px;

@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 
-// Dados de exemplo para os planos
 const plansData = [
   {
     name: 'Plano Essencial',
@@ -39,7 +38,7 @@ const PricingContainer = styled.section.attrs({ id: 'pricing' })`
   flex-direction: column;
   align-items: center;
   padding: 80px 24px;
-  background: linear-gradient(135deg, #1a1a1a, #000); // Fundo para contraste
+  background: linear-gradient(135deg, #1a1a1a, #000); 
   color: #fff;
   text-align: center;
 `;
@@ -114,7 +113,7 @@ const CallToActionButton = styled.a`
   border-radius: 50px;
   text-decoration: none;
   transition: all 0.3s ease-in-out;
-  margin-top: auto; // Alinha o botão na parte inferior
+  margin-top: auto; 
 
   &:hover {
     background-color: #f0f0f0;
