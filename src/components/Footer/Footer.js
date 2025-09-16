@@ -71,13 +71,13 @@ export default function Footer() {
             <Logo>Nexus Labs IA</Logo>
             <WebsiteRights>Nexus Labs IA © {new Date().getFullYear()} Todos os direitos reservados.</WebsiteRights>
             <SocialIcons>
-              <SocialIconLink href="/" target="_blank" aria-label="Linkedin">
+              <SocialIconLink href="/" target="_blank" aria-label="LinkedIn da Nexus Labs IA">
                 <FaLinkedin />
               </SocialIconLink>
-              <SocialIconLink href="/" target="_blank" aria-label="GitHub">
+              <SocialIconLink href="/" target="_blank" aria-label="GitHub da Nexus Labs IA">
                 <FaGithub />
               </SocialIconLink>
-              <SocialIconLink href="/" target="_blank" aria-label="Twitter">
+              <SocialIconLink href="/" target="_blank" aria-label="Twitter da Nexus Labs IA">
                 <FaTwitter />
               </SocialIconLink>
             </SocialIcons>

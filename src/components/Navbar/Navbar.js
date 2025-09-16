@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
 
-const Nav = styled.nav`
+const Nav = styled.nav.attrs({ 'aria-label': 'Navegação principal do site' })`
   background: #000;
   height: 80px;
   display: flex;
@@ -69,13 +69,13 @@ export default function Navbar() {
   return (
     <Nav>
       <NavbarContainer>
-        <NavLogo href="/">Nexus Labs IA</NavLogo>
+        <NavLogo href="/" aria-label="Página inicial Nexus Labs IA">Nexus Labs IA</NavLogo>
         <NavMenu>
           <NavItem>
             <NavLinks href="#services">Serviços</NavLinks>
           </NavItem>
           <NavItem>
-            <NavLinks href="#pricing">Planos</NavLinks>
+            <NavLinks href="#pricing">Planos</Nav-Links>
           </NavItem>
           <NavItem>
             <NavLinks href="#contact">Contato</NavLinks>
