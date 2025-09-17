@@ -1,89 +1,130 @@
+// src/components/Footer/Footer.js
+
+import React from 'react';
 import styled from 'styled-components';
-import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
+import { FaLinkedin, FaGithub, FaEnvelope } from 'react-icons/fa';
+import { useTheme } from '../../context/ThemeContext';
 
 const FooterContainer = styled.footer`
-  background-color: #000;
-  color: #fff;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   padding: 60px 24px;
-  text-align: center;
-`;
-
-const FooterWrap = styled.div`
-  max-width: 1100px;
-  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
+  text-align: center;
+  transition: all 0.5s ease;
 `;
 
-const SocialMedia = styled.section`
-  max-width: 1000px;
-  width: 100%;
-`;
-
-const SocialMediaWrap = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+const FooterContent = styled.div`
   max-width: 1100px;
-  margin: 40px auto 0 auto;
-
-  @media screen and (max-width: 820px) {
-    flex-direction: column;
-    gap: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  @media screen and (min-width: 768px) {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
   }
 `;
 
-const WebsiteRights = styled.small`
-  color: #fff;
-  margin-bottom: 16px;
+const FooterSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  @media screen and (min-width: 768px) {
+    align-items: flex-start;
+  }
+`;
+
+const FooterBrand = styled.h2`
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: ${(props) => props.theme.text};
+`;
+
+const FooterLinkList = styled.ul`
+  list-style: none;
+  padding: 0;
+  margin: 0;
+`;
+
+const FooterLinkItem = styled.li`
+  margin-bottom: 10px;
+`;
+
+const FooterLink = styled.a`
+  text-decoration: none;
+  color: ${(props) => props.theme.text};
+  transition: color 0.3s ease;
+  &:hover {
+    color: #007bff;
+  }
 `;
 
 const SocialIcons = styled.div`
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 240px;
-`;
-
-const SocialIconLink = styled.a`
-  color: #fff;
-  font-size: 24px;
-  transition: transform 0.3s ease-in-out;
-
-  &:hover {
-    transform: translateY(-5px);
+  gap: 20px;
+  margin-top: 20px;
+  @media screen and (min-width: 768px) {
+    margin-top: 0;
   }
 `;
 
-const Logo = styled.p`
+const SocialIconLink = styled.a`
   font-size: 1.5rem;
-  font-weight: bold;
+  color: ${(props) => props.theme.text};
+  transition: color 0.3s ease;
+  &:hover {
+    color: #007bff;
+  }
+`;
+
+const Copyright = styled.p`
+  margin-top: 40px;
+  font-size: 0.9rem;
+  color: #888;
 `;
 
 export default function Footer() {
+  const { theme } = useTheme();
+
   return (
     <FooterContainer>
-      <FooterWrap>
-        <SocialMedia>
-          <SocialMediaWrap>
-            <Logo>Nexus Labs IA</Logo>
-            <WebsiteRights>Nexus Labs IA © {new Date().getFullYear()} Todos os direitos reservados.</WebsiteRights>
-            <SocialIcons>
-              <SocialIconLink href="/" target="_blank" aria-label="LinkedIn da Nexus Labs IA">
-                <FaLinkedin />
-              </SocialIconLink>
-              <SocialIconLink href="/" target="_blank" aria-label="GitHub da Nexus Labs IA">
-                <FaGithub />
-              </SocialIconLink>
-              <SocialIconLink href="/" target="_blank" aria-label="Twitter da Nexus Labs IA">
-                <FaTwitter />
-              </SocialIconLink>
-            </SocialIcons>
-          </SocialMediaWrap>
-        </SocialMedia>
-      </FooterWrap>
+      <FooterContent>
+        <FooterSection>
+          <FooterBrand>Nexus Labs IA</FooterBrand>
+          <p>Soluções digitais que transformam ideias em realidade.</p>
+          <SocialIcons>
+            <SocialIconLink href="#" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">
+              <FaLinkedin />
+            </SocialIconLink>
+            <SocialIconLink href="#" aria-label="GitHub" target="_blank" rel="noopener noreferrer">
+              <FaGithub />
+            </SocialIconLink>
+            <SocialIconLink href="mailto:contato@nexuslabs.ia" aria-label="Email">
+              <FaEnvelope />
+            </SocialIconLink>
+          </SocialIcons>
+        </FooterSection>
+
+        <FooterSection>
+          <h3>Links Rápidos</h3>
+          <FooterLinkList>
+            <FooterLinkItem>
+              <FooterLink href="#services">Serviços</FooterLink>
+            </FooterLinkItem>
+            <FooterLinkItem>
+              <FooterLink href="#pricing">Planos</FooterLink>
+            </FooterLinkItem>
+            <FooterLinkItem>
+              <FooterLink href="#contact">Contato</FooterLink>
+            </FooterLinkItem>
+          </FooterLinkList>
+        </FooterSection>
+      </FooterContent>
+      <Copyright>&copy; {new Date().getFullYear()} Nexus Labs IA. Todos os direitos reservados.</Copyright>
     </FooterContainer>
   );
 }

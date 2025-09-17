@@ -14,7 +14,7 @@ const darkTheme = {
 
 const lightTheme = {
     background: '#f0f2f5',
-    text: '#121212',
+    text: '#333333', 
     cardBackground: 'rgba(0, 0, 0, 0.05)',
     cardBorder: 'rgba(0, 0, 0, 0.1)',
     glassBackground: 'rgba(0, 0, 0, 0.15)',
