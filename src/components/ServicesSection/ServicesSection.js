@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { FaCode, FaShoppingCart, FaRocket } from 'react-icons/fa';
+import { useTheme } from '../../context/ThemeContext';
 
 const servicesData = [
   {
@@ -24,9 +25,10 @@ const ServicesContainer = styled.section.attrs({ id: 'services' })`
   flex-direction: column;
   align-items: center;
   padding: 80px 24px;
-  background: #111;
-  color: #fff;
+  background: ${(props) => props.theme.background}; 
+  color: ${(props) => props.theme.text}; 
   text-align: center;
+  transition: background 0.5s ease, color 0.5s ease;
 `;
 
 const ServicesTitle = styled.h2`
@@ -44,14 +46,11 @@ const ServicesSubtitle = styled.p`
 
 const ServicesGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 40px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  max-width: 1100px;
   width: 100%;
-  max-width: 1200px;
-  
-  @media screen and (max-width: 768px) {
-    gap: 20px;
-  }
+  margin-top: 40px;
 `;
 
 const ServiceCard = styled.div`
@@ -85,6 +84,29 @@ const CardDescription = styled.p`
 `;
 
 export default function ServicesSection() {
+
+  const { theme } = useTheme(); 
+
+  const iconColor = theme === 'dark' ? '#fff' : '#000';
+
+  const servicesData = [
+        {
+            title: 'Sistemas de Gestão Personalizados',
+            description: 'Desenvolvemos plataformas que otimizam processos internos, melhoram a eficiência e centralizam suas operações de forma segura.',
+            icon: <FaCode size={50} color={iconColor} />,
+        },
+        {
+            title: 'E-commerce Estratégico',
+            description: 'Crie uma loja online escalável e de alta conversão. Nossa tecnologia garante uma experiência de compra fluida e segura para seus clientes.',
+            icon: <FaShoppingCart size={50} color={iconColor} />,
+        },
+        {
+            title: 'Landing Pages e SPAs',
+            description: 'Desenvolvemos páginas de alta performance focadas em captar leads e converter visitantes em clientes, com a velocidade e dinamismo das SPAs.',
+            icon: <FaRocket size={50} color={iconColor} />,
+        },
+    ];
+
   return (
     <ServicesContainer>
       <ServicesTitle>Nossas Soluções de Desenvolvimento</ServicesTitle>

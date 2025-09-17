@@ -1,110 +1,100 @@
+import React from 'react';
 import styled from 'styled-components';
+import { useTheme } from '../../context/ThemeContext';
 
 const ContactContainer = styled.section.attrs({ id: 'contact' })`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding: 80px 24px;
-  background: linear-gradient(135deg, #000, #111);
-  color: #fff;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
   text-align: center;
+  transition: background 0.5s ease, color 0.5s ease;
 `;
 
 const ContactTitle = styled.h2`
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  margin-bottom: 20px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 16px;
 `;
 
 const ContactSubtitle = styled.p`
   font-size: clamp(1rem, 2vw, 1.2rem);
-  max-width: 700px;
-  margin-bottom: 60px;
-  color: #bbb;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const FormCard = styled.div`
+  background: ${(props) => props.theme.glassBackground};
+  border: 1px solid ${(props) => props.theme.glassBorder};
+  backdrop-filter: blur(10px);
   padding: 40px;
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   max-width: 600px;
-  width: 100%;
+  margin: 0 auto;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
 `;
 
 const StyledForm = styled.form`
   display: flex;
   flex-direction: column;
   gap: 20px;
+`;
+
+const FormLabel = styled.label`
+  font-size: 1.1rem;
   text-align: left;
 `;
 
-const InputGroup = styled.div`
-  display: flex;
-  flex-direction: column;
-`;
-
-const StyledLabel = styled.label`
-  font-size: 1rem;
-  margin-bottom: 8px;
-  color: #ccc;
-`;
-
-const StyledInput = styled.input`
+const FormInput = styled.input`
   padding: 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
   font-size: 1rem;
-  outline: none;
-  
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: ${(props) => props.theme.inputBackground || '#fff'};
+  color: ${(props) => props.theme.text};
+  transition: all 0.3s ease;
+
   &:focus {
-    border-color: #fff;
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
 `;
 
-const StyledTextArea = styled.textarea`
+const FormTextArea = styled.textarea`
   padding: 12px;
-  border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.05);
-  color: #fff;
   font-size: 1rem;
-  outline: none;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  background: ${(props) => props.theme.inputBackground || '#fff'};
+  color: ${(props) => props.theme.text};
+  transition: all 0.3s ease;
   resize: vertical;
-  min-height: 120px;
 
   &:focus {
-    border-color: #fff;
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   }
 `;
 
-const SubmitButton = styled.button`
-  background-color: #fff;
-  color: #000;
-  padding: 12px 32px;
-  font-size: 1.2rem;
-  border-radius: 50px;
+const FormButton = styled.button`
+  padding: 12px 24px;
+  font-size: 1.1rem;
   border: none;
+  border-radius: 5px;
   cursor: pointer;
-  transition: all 0.3s ease-in-out;
-  margin-top: 20px;
-  
+  background-color: #007bff;
+  color: #fff;
+  transition: background-color 0.3s ease;
+
   &:hover {
-    background-color: #f0f0f0;
-    transform: translateY(-2px);
+    background-color: #0056b3;
   }
 `;
 
 export default function ContactSection() {
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    alert('Formulário enviado! Entraremos em contato em breve.');
-  };
+  const { theme } = useTheme();
 
   return (
     <ContactContainer>
@@ -113,20 +103,35 @@ export default function ContactSection() {
         Nossa equipe de especialistas está pronta para transformar suas ideias em soluções digitais que geram resultados. Fale conosco!
       </ContactSubtitle>
       <FormCard>
-        <StyledForm onSubmit={handleSubmit}>
-          <InputGroup>
-            <StyledLabel htmlFor="name">Nome</StyledLabel>
-            <StyledInput type="text" id="name" name="name" required />
-          </InputGroup>
-          <InputGroup>
-            <StyledLabel htmlFor="email">E-mail</StyledLabel>
-            <StyledInput type="email" id="email" name="email" required />
-          </InputGroup>
-          <InputGroup>
-            <StyledLabel htmlFor="message">Mensagem</StyledLabel>
-            <StyledTextArea id="message" name="message" required />
-          </InputGroup>
-          <SubmitButton type="submit">Enviar Mensagem</SubmitButton>
+        <StyledForm
+          action="https://formspree.io/f/xvgbjwra" 
+          method="POST"
+        >
+          <FormLabel htmlFor="name">Nome</FormLabel>
+          <FormInput
+            type="text"
+            id="name"
+            name="name" 
+            placeholder="Seu nome"
+            required
+          />
+          <FormLabel htmlFor="email">Email</FormLabel>
+          <FormInput
+            type="email"
+            id="email"
+            name="email" 
+            placeholder="seu@email.com"
+            required
+          />
+          <FormLabel htmlFor="message">Mensagem</FormLabel>
+          <FormTextArea
+            id="message"
+            name="message" 
+            rows="5"
+            placeholder="Escreva sua mensagem aqui..."
+            required
+          />
+          <FormButton type="submit">Enviar Mensagem</FormButton>
         </StyledForm>
       </FormCard>
     </ContactContainer>

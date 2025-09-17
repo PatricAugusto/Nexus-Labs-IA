@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { useTheme } from '../../context/ThemeContext';
 
 const plansData = [
   {
@@ -34,49 +35,60 @@ const plansData = [
 ];
 
 const PricingContainer = styled.section.attrs({ id: 'pricing' })`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
   padding: 80px 24px;
-  background: linear-gradient(135deg, #1a1a1a, #000); 
-  color: #fff;
+  background: ${(props) => props.theme.background}; 
+  color: ${(props) => props.theme.text}; 
   text-align: center;
+  transition: background 0.5s ease, color 0.5s ease;
 `;
 
 const PricingTitle = styled.h2`
-  font-size: clamp(2rem, 4vw, 3.5rem);
-  margin-bottom: 20px;
+  font-size: clamp(2rem, 4vw, 3rem);
+  margin-bottom: 16px;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: center;
+  }
 `;
 
 const PricingSubtitle = styled.p`
   font-size: clamp(1rem, 2vw, 1.2rem);
-  max-width: 700px;
-  margin-bottom: 60px;
-  color: #bbb;
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+
+  @media screen and (min-width: 768px) {
+    text-align: center;
+  }
 `;
+
 
 const PricingGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 40px;
-  width: 100%;
-  max-width: 1200px;
+  max-width: 1000px;
+  margin-top: 40px;
+  margin-left: auto;
+  margin-right: auto;
 `;
 
 const PricingCard = styled.div`
+  background: ${(props) => props.theme.cardBackground};
+  border: 1px solid ${(props) => props.theme.cardBorder}; 
+  border-radius: 10px;
   padding: 40px;
-  border-radius: 15px;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease-in-out;
   display: flex;
   flex-direction: column;
-  
+  align-items: center;
+  transition: all 0.5s ease;
+
   &:hover {
     transform: translateY(-10px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
   }
 `;
 
@@ -122,6 +134,8 @@ const CallToActionButton = styled.a`
 `;
 
 export default function PricingSection() {
+  const { theme } = useTheme();
+
   return (
     <PricingContainer>
       <PricingTitle>Escolha o seu Plano de Desenvolvimento</PricingTitle>

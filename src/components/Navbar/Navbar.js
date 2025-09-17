@@ -1,9 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
+import { FaMoon, FaSun } from 'react-icons/fa';
+import { useTheme } from '../../context/ThemeContext';
 
 const Nav = styled.nav.attrs({ 'aria-label': 'Navegação principal do site' })`
-  background: #000;
+  background: ${(props) => props.theme.background};
   height: 80px;
   display: flex;
   justify-content: center;
@@ -13,6 +15,7 @@ const Nav = styled.nav.attrs({ 'aria-label': 'Navegação principal do site' })`
   top: 0;
   z-index: 10;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transition: background 0.5s ease;
 `;
 
 const NavbarContainer = styled.div`
@@ -26,7 +29,7 @@ const NavbarContainer = styled.div`
 `;
 
 const NavLogo = styled(Link)`
-  color: #fff;
+  color: ${(props) => props.theme.text};
   justify-self: flex-start;
   cursor: pointer;
   font-size: 1.5rem;
@@ -47,10 +50,13 @@ const NavMenu = styled.ul`
 
 const NavItem = styled.li`
   height: 80px;
+  display: flex; 
+  align-items: center;
+  justify-content: center;
 `;
 
 const NavLinks = styled.a`
-  color: #fff;
+  color: ${(props) => props.theme.text};
   display: flex;
   align-items: center;
   text-decoration: none;
@@ -61,11 +67,29 @@ const NavLinks = styled.a`
 
   &:hover {
     color: #ccc;
-    border-bottom: 3px solid #fff;
+    border-bottom: 3px solid ${(props) => props.theme.text};
   }
 `;
 
+const ThemeToggleButton = styled.button`
+    background: transparent;
+    border: none;
+    color: ${(props) => props.theme.text};
+    font-size: 1.5rem;
+    cursor: pointer;
+    margin-left: 20px;
+    transition: color 0.3s ease;
+    display: flex; 
+    align-items: center; 
+
+    &:hover {
+        color: #bbb;
+    }
+`;
+
 export default function Navbar() {
+  const { theme, toggleTheme } = useTheme();
+
   return (
     <Nav>
       <NavbarContainer>
@@ -75,10 +99,15 @@ export default function Navbar() {
             <NavLinks href="#services">Serviços</NavLinks>
           </NavItem>
           <NavItem>
-            <NavLinks href="#pricing">Planos</Nav-Links>
+            <NavLinks href="#pricing">Planos</NavLinks>
           </NavItem>
           <NavItem>
             <NavLinks href="#contact">Contato</NavLinks>
+          </NavItem>
+          <NavItem>
+            <ThemeToggleButton onClick={toggleTheme} aria-label="Alternar tema">
+                {theme === 'dark' ? <FaSun /> : <FaMoon />}
+            </ThemeToggleButton>
           </NavItem>
         </NavMenu>
       </NavbarContainer>

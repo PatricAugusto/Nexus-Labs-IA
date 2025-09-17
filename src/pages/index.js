@@ -1,6 +1,4 @@
-// src/pages/index.js
-
-import Head from 'next/head'; // Importando o componente Head
+import Head from 'next/head';
 import HeroSection from '../components/HeroSection/HeroSection';
 import ServicesSection from '../components/ServicesSection/ServicesSection';
 import PricingSection from '../components/PricingSection/PricingSection';
@@ -22,7 +20,6 @@ export default function Home() {
         <meta name="robots" content="index, follow" />
         <link rel="icon" href="/favicon.ico" />
         
-        {/* Adicionando Dados Estruturados para o Google */}
         <script type="application/ld+json" dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",

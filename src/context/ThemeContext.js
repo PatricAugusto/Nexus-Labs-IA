@@ -1,9 +1,6 @@
-// src/context/ThemeContext.js
-
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import { ThemeProvider as StyledThemeProvider } from 'styled-components';
 
-// 1. Criar o Contexto
 export const ThemeContext = createContext();
 
 const darkTheme = {
@@ -24,7 +21,6 @@ const lightTheme = {
     glassBorder: 'rgba(0, 0, 0, 0.3)',
 };
 
-// 2. Criar o Provedor do Contexto
 export const ThemeProvider = ({ children }) => {
     const [theme, setTheme] = useState('dark');
 
@@ -43,7 +39,6 @@ export const ThemeProvider = ({ children }) => {
     );
 };
 
-// 3. Criar o Hook Personalizado para usar o Contexto
 export const useTheme = () => {
     return useContext(ThemeContext);
 };
