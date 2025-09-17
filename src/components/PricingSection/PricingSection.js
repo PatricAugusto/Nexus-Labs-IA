@@ -4,7 +4,7 @@ import { useTheme } from '../../context/ThemeContext';
 const plansData = [
   {
     name: 'Plano Essencial',
-    price: '$499/projeto',
+    price: '$899/projeto',
     features: [
       'Desenvolvimento de Landing Page',
       'Design Responsivo',
@@ -14,7 +14,7 @@ const plansData = [
   },
   {
     name: 'Plano Profissional',
-    price: '$1.499/projeto',
+    price: '$1.999/projeto',
     features: [
       'Desenvolvimento de SPA ou E-commerce',
       'Integração de Pagamento',
@@ -65,7 +65,6 @@ const PricingSubtitle = styled.p`
   }
 `;
 
-
 const PricingGrid = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -93,15 +92,16 @@ const PricingCard = styled.div`
 `;
 
 const PlanName = styled.h3`
-  font-size: 1.8rem;
-  margin-bottom: 10px;
+  font-size: 1.5rem;
+  margin-bottom: 20px;
+  color: ${(props) => props.theme.text}; 
 `;
 
 const PlanPrice = styled.p`
   font-size: 2.5rem;
   font-weight: bold;
   margin-bottom: 20px;
-  color: #fff;
+  color: ${(props) => props.theme.text}; 
 `;
 
 const FeaturesList = styled.ul`
@@ -112,11 +112,8 @@ const FeaturesList = styled.ul`
 `;
 
 const FeatureItem = styled.li`
-  margin-bottom: 10px;
-  font-size: 1rem;
-  color: #ccc;
+  color: ${(props) => props.theme.text};
 `;
-
 const CallToActionButton = styled.a`
   background-color: #fff;
   color: #000;

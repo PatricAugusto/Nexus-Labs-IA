@@ -1,43 +1,55 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
-import Link from 'next/link';
-import { FaMoon, FaSun } from 'react-icons/fa';
 import { useTheme } from '../../context/ThemeContext';
+import { FaBars, FaTimes } from 'react-icons/fa';
 
-const Nav = styled.nav.attrs({ 'aria-label': 'Navegação principal do site' })`
-  background: ${(props) => props.theme.background};
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  position: sticky;
+const NavbarContainer = styled.nav`
+  position: fixed;
   top: 0;
-  z-index: 10;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  transition: background 0.5s ease;
-`;
-
-const NavbarContainer = styled.div`
+  left: 0;
+  width: 100%;
+  height: 80px;
   display: flex;
   justify-content: space-between;
-  height: 80px;
-  z-index: 1;
-  width: 100%;
-  padding: 0 24px;
-  max-width: 1100px;
+  align-items: center;
+  padding: 0 40px;
+  z-index: 999;
+  background: ${(props) => props.theme.background};
+  color: ${(props) => props.theme.text};
+  transition: all 0.5s ease;
+
+  @media screen and (max-width: 768px) {
+    padding: 0 20px;
+  }
+  @media screen and (max-width: 480px) {
+    padding: 0 16px; 
+  }
 `;
 
-const NavLogo = styled(Link)`
-  color: ${(props) => props.theme.text};
-  justify-self: flex-start;
-  cursor: pointer;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  margin-left: 24px;
+const NavLogo = styled.a`
+  font-size: 1.8rem;
   font-weight: bold;
+  color: ${(props) => props.theme.text};
   text-decoration: none;
+`;
+
+const MobileIcon = styled.div`
+  display: none;
+
+  @media screen and (max-width: 768px) {
+    display: block;
+    font-size: 1.8rem;
+    cursor: pointer;
+    color: ${(props) => props.theme.text}; 
+
+    &:hover {
+      color: #007bff; 
+    }
+
+    @media screen and (max-width: 480px) {
+      font-size: 1.5rem; 
+    }
+  }
 `;
 
 const NavMenu = styled.ul`
@@ -45,17 +57,17 @@ const NavMenu = styled.ul`
   align-items: center;
   list-style: none;
   text-align: center;
-  margin-right: -22px;
+  
+  @media screen and (max-width: 768px) {
+    display: none;
+  }
 `;
 
 const NavItem = styled.li`
   height: 80px;
-  display: flex; 
-  align-items: center;
-  justify-content: center;
 `;
 
-const NavLinks = styled.a`
+const NavLink = styled.a`
   color: ${(props) => props.theme.text};
   display: flex;
   align-items: center;
@@ -63,54 +75,92 @@ const NavLinks = styled.a`
   padding: 0 1rem;
   height: 100%;
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
 
   &:hover {
-    color: #ccc;
-    border-bottom: 3px solid ${(props) => props.theme.text};
+    color: #007bff;
   }
 `;
 
-const ThemeToggleButton = styled.button`
-    background: transparent;
-    border: none;
-    color: ${(props) => props.theme.text};
-    font-size: 1.5rem;
-    cursor: pointer;
-    margin-left: 20px;
-    transition: color 0.3s ease;
-    display: flex; 
-    align-items: center; 
+const MobileMenu = styled.div`
+  display: none;
 
-    &:hover {
-        color: #bbb;
-    }
+  @media screen and (max-width: 768px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: ${(props) => props.theme.background};
+    position: absolute;
+    top: 0;
+    left: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+    width: 100%;
+    height: 100vh;
+    transition: all 0.5s ease-in-out;
+    opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
+    z-index: 998;
+  }
+`;
+
+const MobileMenuItem = styled.li`
+  margin-bottom: 2rem;
+  list-style: none;
+`;
+
+const MobileNavLink = styled.a`
+  color: ${(props) => props.theme.text};
+  font-size: 1.5rem;
+  text-decoration: none;
+
+  &:hover {
+    color: #007bff;
+  }
 `;
 
 export default function Navbar() {
+  const [isOpen, setIsOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
+  const toggleMenu = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
-    <Nav>
+    <>
       <NavbarContainer>
-        <NavLogo href="/" aria-label="Página inicial Nexus Labs IA">Nexus Labs IA</NavLogo>
+        <NavLogo href="/">Nexus Labs</NavLogo>
+        
+        <MobileIcon onClick={toggleMenu} theme={theme}>
+          {isOpen ? <FaTimes /> : <FaBars />}
+        </MobileIcon>
+
         <NavMenu>
+          <NavItem><NavLink href="#services">Serviços</NavLink></NavItem>
+          <NavItem><NavLink href="#pricing">Planos</NavLink></NavItem>
+          <NavItem><NavLink href="#contact">Contato</NavLink></NavItem>
           <NavItem>
-            <NavLinks href="#services">Serviços</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks href="#pricing">Planos</NavLinks>
-          </NavItem>
-          <NavItem>
-            <NavLinks href="#contact">Contato</NavLinks>
-          </NavItem>
-          <NavItem>
-            <ThemeToggleButton onClick={toggleTheme} aria-label="Alternar tema">
-                {theme === 'dark' ? <FaSun /> : <FaMoon />}
-            </ThemeToggleButton>
+            <NavLink onClick={toggleTheme}>
+              {theme.background === '#121212' ? 'Modo Claro' : 'Modo Escuro'}
+            </NavLink>
           </NavItem>
         </NavMenu>
       </NavbarContainer>
-    </Nav>
+
+      <MobileMenu isOpen={isOpen} theme={theme}>
+        <MobileMenuItem>
+          <MobileNavLink href="#services" onClick={toggleMenu}>Serviços</MobileNavLink>
+        </MobileMenuItem>
+        <MobileMenuItem>
+          <MobileNavLink href="#pricing" onClick={toggleMenu}>Planos</MobileNavLink>
+        </MobileMenuItem>
+        <MobileMenuItem>
+          <MobileNavLink href="#contact" onClick={toggleMenu}>Contato</MobileNavLink>
+        </MobileMenuItem>
+        <MobileMenuItem>
+          <MobileNavLink onClick={() => { toggleTheme(); toggleMenu(); }}>
+            {theme.background === '#121212' ? 'Modo Claro' : 'Modo Escuro'}
+          </MobileNavLink>
+        </MobileMenuItem>
+      </MobileMenu>
+    </>
   );
 }

@@ -1,15 +1,17 @@
+// src/pages/_app.js
+
 import { ThemeProvider } from '../context/ThemeContext';
 import { createGlobalStyle } from 'styled-components';
 import Head from 'next/head';
 
 const GlobalStyle = createGlobalStyle`
   * {
-    margin: 0;
-    padding: 0;
     box-sizing: border-box;
   }
 
   html, body {
+    margin: 0;
+    padding: 0;
     width: 100%;
     height: 100%;
     overflow-x: hidden;

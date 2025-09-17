@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Image from 'next/image'; 
+import Image from 'next/image';
 import { useTheme } from '../../context/ThemeContext';
 
 const HeroContainer = styled.section`
@@ -12,7 +12,7 @@ const HeroContainer = styled.section`
   padding: 0 24px;
   color: #fff;
   text-align: center;
-  overflow: hidden; 
+  overflow: hidden;
 `;
 
 const HeroImageWrapper = styled.div`
@@ -21,10 +21,10 @@ const HeroImageWrapper = styled.div`
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; 
+  z-index: -1;
 
   & > span {
-    position: fixed !important; 
+    position: fixed !important;
     top: 0;
     left: 0;
     width: 100%;
@@ -36,19 +36,30 @@ const HeroImageWrapper = styled.div`
   }
 `;
 
+const ImageOverlay = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+`;
+
 const GlassContainer = styled.div`
   padding: 60px;
   border-radius: 20px;
-  background: ${(props) => props.theme.glassBackground}; 
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid ${(props) => props.theme.glassBorder}; 
+  background: ${(props) => props.theme.glassBackground};
+  backdrop-filter: blur(5px); /* Reduzindo o desfoque para 5px */
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid ${(props) => props.theme.glassBorder};
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   max-width: 800px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
+  z-index: 2; 
 
   @media screen and (min-width: 768px) {
     padding: 80px;
@@ -65,15 +76,15 @@ const HeroH1 = styled.h1`
   font-size: clamp(2.5rem, 5vw, 4.5rem);
   margin-bottom: 24px;
   line-height: 1.2;
-  color: #fff; 
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5); 
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const HeroP = styled.p`
   font-size: clamp(1rem, 2vw, 1.5rem);
   margin-bottom: 48px;
-  color: #fff; 
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  color: #fff;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5);
 `;
 
 const HeroButton = styled.a`
@@ -101,8 +112,9 @@ export default function HeroSection() {
           layout="fill"
           objectFit="cover"
           quality={100}
-          priority 
+          priority
         />
+        <ImageOverlay /> 
       </HeroImageWrapper>
       <GlassContainer>
         <HeroContent>

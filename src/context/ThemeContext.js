@@ -14,11 +14,11 @@ const darkTheme = {
 
 const lightTheme = {
     background: '#f0f2f5',
-    text: '#333333', 
-    cardBackground: 'rgba(0, 0, 0, 0.05)',
-    cardBorder: 'rgba(0, 0, 0, 0.1)',
-    glassBackground: 'rgba(0, 0, 0, 0.15)',
-    glassBorder: 'rgba(0, 0, 0, 0.3)',
+    text: '#212121', 
+    cardBackground: '#ffffff',
+    cardBorder: '#e0e0e0',
+    glassBackground: 'rgba(0, 0, 0, 0.05)',
+    glassBorder: 'rgba(0, 0, 0, 0.2)',
 };
 
 export const ThemeProvider = ({ children }) => {

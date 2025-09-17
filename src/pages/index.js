@@ -6,8 +6,13 @@ import ContactSection from '../components/ContactSection/ContactSection';
 import Footer from '../components/Footer/Footer';
 import Navbar from '../components/Navbar/Navbar';
 import AnimatedSection from '../components/AnimatedSection/AnimatedSection';
+import WhatsAppButton from '../components/WhatsAppButton/WhatsAppButton';
 
 export default function Home() {
+
+  const phoneNumber = '5555992066795';
+  const prefilledMessage = 'Olá, gostaria de saber mais sobre as soluções de desenvolvimento web.';
+
   return (
     <>
       <Head>
@@ -58,6 +63,8 @@ export default function Home() {
       </AnimatedSection>
       
       <Footer />
+
+      <WhatsAppButton phoneNumber={phoneNumber} message={prefilledMessage} />
     </>
   );
 }
