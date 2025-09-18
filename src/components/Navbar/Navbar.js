@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import { useTheme } from '../../context/ThemeContext';
-import { FaBars, FaTimes } from 'react-icons/fa';
+import { FaBars, FaTimes, FaMoon, FaSun } from 'react-icons/fa';
 
 const NavbarContainer = styled.nav`
   position: fixed;
@@ -22,7 +22,7 @@ const NavbarContainer = styled.nav`
     padding: 0 20px;
   }
   @media screen and (max-width: 480px) {
-    padding: 0 16px; 
+    padding: 0 16px;
   }
 `;
 
@@ -40,14 +40,14 @@ const MobileIcon = styled.div`
     display: block;
     font-size: 1.8rem;
     cursor: pointer;
-    color: ${(props) => props.theme.text}; 
-
+    color: ${(props) => props.theme.text};
+    
     &:hover {
-      color: #007bff; 
+      color: #007bff;
     }
 
     @media screen and (max-width: 480px) {
-      font-size: 1.5rem; 
+      font-size: 1.5rem;
     }
   }
 `;
@@ -92,11 +92,11 @@ const MobileMenu = styled.div`
     background: ${(props) => props.theme.background};
     position: absolute;
     top: 0;
-    left: ${({ isOpen }) => (isOpen ? '0' : '-100%')};
+    left: ${({ $isOpen }) => ($isOpen ? '0' : '-100%')};
     width: 100%;
     height: 100vh;
     transition: all 0.5s ease-in-out;
-    opacity: ${({ isOpen }) => (isOpen ? '1' : '0')};
+    opacity: ${({ $isOpen }) => ($isOpen ? '1' : '0')};
     z-index: 998;
   }
 `;
@@ -114,6 +114,16 @@ const MobileNavLink = styled.a`
   &:hover {
     color: #007bff;
   }
+`;
+
+const IconWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: ${(props) => props.theme.text};
+  padding: 0 1rem;
 `;
 
 export default function Navbar() {
@@ -138,14 +148,14 @@ export default function Navbar() {
           <NavItem><NavLink href="#pricing">Planos</NavLink></NavItem>
           <NavItem><NavLink href="#contact">Contato</NavLink></NavItem>
           <NavItem>
-            <NavLink onClick={toggleTheme}>
-              {theme.background === '#121212' ? 'Modo Claro' : 'Modo Escuro'}
-            </NavLink>
+            <IconWrapper onClick={toggleTheme} theme={theme}>
+              {theme.background === '#121212' ? <FaSun /> : <FaMoon />}
+            </IconWrapper>
           </NavItem>
         </NavMenu>
       </NavbarContainer>
 
-      <MobileMenu isOpen={isOpen} theme={theme}>
+      <MobileMenu $isOpen={isOpen} theme={theme}>
         <MobileMenuItem>
           <MobileNavLink href="#services" onClick={toggleMenu}>Serviços</MobileNavLink>
         </MobileMenuItem>
@@ -157,7 +167,7 @@ export default function Navbar() {
         </MobileMenuItem>
         <MobileMenuItem>
           <MobileNavLink onClick={() => { toggleTheme(); toggleMenu(); }}>
-            {theme.background === '#121212' ? 'Modo Claro' : 'Modo Escuro'}
+            {theme.background === '#121212' ? <FaSun /> : <FaMoon />}
           </MobileNavLink>
         </MobileMenuItem>
       </MobileMenu>

@@ -13,6 +13,7 @@ const HeroContainer = styled.section`
   color: #fff;
   text-align: center;
   overflow: hidden;
+  margin-top: 80px; 
 `;
 
 const HeroImageWrapper = styled.div`
@@ -109,8 +110,8 @@ export default function HeroSection() {
         <Image
           src="/images/Nexus-Labs-IA-logo.png"
           alt="Uma equipe de desenvolvedores da Nexus Labs trabalhando em um projeto, com foco em otimização e performance."
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           quality={100}
           priority
         />
